@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Bookings</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1{
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .card{
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .movie-title{
+            color: #d32f2f;
+            margin-bottom: 15px;
+        }
+
+        .info{
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .seats{
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .amount{
+            color: green;
+            font-weight: bold;
+        }
+
+        .empty{
+            text-align: center;
+            font-size: 18px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🎟 My Bookings</h1>
+
+{% for booking in bookings %}
+
+<div class="card">
+
+    <h2 class="movie-title">
+        🎬 {{ booking.show.movie.title }}
+    </h2>
+
+    <div class="info">
+        <strong>Booked Seats:</strong>
+        <span class="seats">
+            {% for seat in booking.seats.all %}
+                {{ seat.seat_number }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Seats
+            {% endfor %}
+        </span>
+    </div>
+
+    <div class="info">
+        <strong>Total Seats:</strong>
+        {{ booking.seats.count }}
+    </div>
+
+    <div class="info">
+        <strong>Total Amount:</strong>
+        <span class="amount">
+            ₹{{ booking.total_amount }}
+        </span>
+    </div>
+
+</div>
+
+{% empty %}
+
+<p class="empty">No bookings found.</p>
+
+{% endfor %}
+
+</body>
+</html>

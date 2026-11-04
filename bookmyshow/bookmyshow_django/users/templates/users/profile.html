@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+</head>
+<body>
+
+<h1>My Profile</h1>
+
+<hr>
+
+<h2>User Information</h2>
+
+<p><strong>Username:</strong> {{ request.user.username }}</p>
+
+<p><strong>Email:</strong> {{ request.user.email }}</p>
+
+<hr>
+
+<h2>My Bookings</h2>
+
+{% if bookings %}
+
+    {% for booking in bookings %}
+
+        <h3>{{ booking.show.movie.title }}</h3>
+
+        <p>
+            Theatre :
+            {{ booking.show.theatre.name }}
+        </p>
+
+        <p>
+            Show Time :
+            {{ booking.show.time }}
+        </p>
+
+        <p>
+            Seats :
+            {% for seat in booking.seats.all %}
+                {{ seat.seat_number }}
+            {% empty %}
+                No Seats
+            {% endfor %}
+        </p>
+
+        <p>
+            Total Amount :
+            ₹{{ booking.total_amount }}
+        </p>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+<p>No bookings yet.</p>
+
+{% endif %}
+
+<a href="/movies/">Back to Home</a>
+
+</body>
+</html>

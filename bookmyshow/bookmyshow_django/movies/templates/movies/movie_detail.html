@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }}</title>
+</head>
+<body>
+
+    <h1>{{ movie.title }}</h1>
+
+    {% if movie.poster %}
+        <img src="{{ movie.poster.url }}" width="250">
+    {% endif %}
+
+    <p>Language: {{ movie.language }}</p>
+
+    <p>Duration: {{ movie.duration }} minutes</p>
+
+    <p>Rating: {{ movie.rating }}/5</p>
+
+    <hr>
+
+    <h2>Available Shows</h2>
+
+{% if theatre_shows %}
+
+    {% for theatre, shows in theatre_shows.items %}
+
+        <h3>{{ theatre.name }}</h3>
+
+        {% for show in shows %}
+
+           <a href="{% url 'seat_selection' show.id %}">
+                <button>{{ show.time }}</button>
+           </a>
+
+        {% endfor %}
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No shows available.</p>
+
+{% endif %}
+
+</body>
+</html>

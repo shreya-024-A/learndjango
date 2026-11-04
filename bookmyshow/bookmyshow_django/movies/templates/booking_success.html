@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Successful</title>
+    
+</a>
+</head>
+<body>
+
+<h1>🎉 Booking Confirmed!</h1>
+
+<h2>{{ movie.title }}</h2>
+
+<p><b>Theatre:</b> {{ theatre.name }}</p>
+
+<p><b>Show Time:</b> {{ show.time }}</p>
+
+<p><b>Seats:</b></p>
+
+<ul>
+{% for seat in selected_seats %}
+    <li>{{ seat.seat_number }}</li>
+{% endfor %}
+</ul>
+
+<p><b>Total Amount:</b> ₹{{ total_amount }}</p>
+
+
+
+<a href="{% url 'my_bookings' %}">
+    View My Bookings
+
+<br><br>
+
+<a href="/movies/">Back to Home</a>
+
+</body>
+</html>
